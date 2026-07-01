@@ -222,6 +222,21 @@ export const recipes: Recipe[] = [
     ],
     notes: "Water temp: 92–94°C.",
   },
+  {
+    id: "april-filter-16g",
+    name: "April Filter 16.5g",
+    brewerId: "april",
+    defaultDose: 16.5,
+    ratio: 15.15,
+    waterTempC: 92,
+    grindSize: "Coarse",
+    totalBrewTimeSec: 150,
+    pouringSchedule: [
+      { timeSeconds: 0, pourGrams: 50 },
+      { timeSeconds: 35, pourGrams: 100 },
+      { timeSeconds: 75, pourGrams: 100 },
+    ],
+  },
 ];
 
 export function getBrewerById(id: string): Brewer | undefined {
