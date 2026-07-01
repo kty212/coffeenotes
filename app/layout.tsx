@@ -75,6 +75,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             <a href="/" className="font-display text-xl text-text-primary">
               Coffee Notes
             </a>
+            <nav className="flex items-center gap-4">
+              <a href="/grind" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Grind</a>
+              <a href="/filters" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Filters</a>
+            </nav>
           </div>
         </header>
         <main className="max-w-2xl mx-auto px-4 py-6">{children}</main>
