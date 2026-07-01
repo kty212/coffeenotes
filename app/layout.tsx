@@ -37,6 +37,20 @@ export default function RootLayout({
       className={`${displayFont.variable} ${bodyFont.variable} ${labelFont.variable} h-full antialiased`}
     >
       <Script
+        strategy="afterInteractive"
+        src="https://www.googletagmanager.com/gtag/js?id=G-Q6XZJCD9RL"
+      />
+      <Script
+        id="gtag-config"
+        strategy="afterInteractive"
+        dangerouslySetInnerHTML={{
+          __html: `window.dataLayer = window.dataLayer || [];
+function gtag(){dataLayer.push(arguments);}
+gtag('js', new Date());
+gtag('config', 'G-Q6XZJCD9RL');`,
+        }}
+      />
+      <Script
         id="gtm"
         strategy="afterInteractive"
         dangerouslySetInnerHTML={{
