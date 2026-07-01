@@ -17,6 +17,7 @@ export const recipes: Recipe[] = [
     ratio: 15,
     waterTempC: 94,
     grindSize: "800 µm",
+    filter: "Hario V60 Paper (01)",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 30, note: "Bloom — swirl gently" },
@@ -35,6 +36,7 @@ export const recipes: Recipe[] = [
     ratio: 15,
     waterTempC: 93,
     grindSize: "900 µm",
+    filter: "Hario V60 Paper (02)",
     totalBrewTimeSec: 210,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "1st pour (sweetness)" },
@@ -54,6 +56,7 @@ export const recipes: Recipe[] = [
     ratio: 15,
     waterTempC: 96,
     grindSize: "1200–1350 µm · Super Coarse",
+    filter: "Hario V60 Paper (02)",
     totalBrewTimeSec: 210,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 30, note: "Bloom" },
@@ -97,6 +100,7 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 94,
     grindSize: "660–780 µm · Medium/Coarse",
+    filter: "Orea Wave",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
@@ -117,6 +121,7 @@ export const recipes: Recipe[] = [
     ratio: 16.67,
     waterTempC: 92,
     grindSize: "600–720 µm · Medium",
+    filter: "Orea Wave",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 40, note: "Spiral pour" },
@@ -136,6 +141,7 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 90,
     grindSize: "510–600 µm · Fine",
+    filter: "Orea Wave",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
@@ -214,6 +220,7 @@ export const recipes: Recipe[] = [
     ratio: 16.67,
     waterTempC: 92,
     grindSize: "650-700 µm",
+    filter: "April Paper Filter",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 100, note: "40g circle pour + 60g center pour" },
@@ -232,6 +239,7 @@ export const recipes: Recipe[] = [
     ratio: 15,
     waterTempC: 93,
     grindSize: "780 µm · Coarse",
+    filter: "April Paper Filter",
     totalBrewTimeSec: 120,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 100, note: "60g circle + 40g center (pour in ~10s)" },
@@ -249,6 +257,7 @@ export const recipes: Recipe[] = [
     ratio: 15.15,
     waterTempC: 92,
     grindSize: "Coarse",
+    filter: "April Paper Filter",
     totalBrewTimeSec: 150,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 50 },
