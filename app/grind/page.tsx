@@ -32,9 +32,9 @@ function pct(microns: number) {
 }
 
 // Comparison table rows (µm → settings per grinder)
-// K-Ultra: 20 µm/click, max ~760 µm
-// ZP6: 22 µm/click
+// Wilfa Uniform: 35 µm/step, scale starts at 1 (step 1 = 0 µm)
 // Comandante C40: 30 µm/click
+// ZP6: 22 µm/click
 const tableRows = [
   { microns: 200  },
   { microns: 400  },
@@ -44,8 +44,8 @@ const tableRows = [
   { microns: 1200 },
 ].map((r) => ({
   microns: r.microns,
+  wilfa: Math.round(r.microns / WILFA_STEP_MICRONS) + 1,
   comandante: Math.round(r.microns / 30),
-  kultra: r.microns <= 760 ? Math.round(r.microns / 20) : null,
   zp6: Math.round(r.microns / 22),
 }));
 
@@ -130,14 +130,14 @@ export default function GrindPage() {
             <thead>
               <tr className="border-b border-border bg-warm-white">
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">µm</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Wilfa Uniform</th>
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Comandante C40</th>
-                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso K-Ultra</th>
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso ZP6</th>
               </tr>
               <tr className="border-b border-border bg-warm-white">
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">step size</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">~35 µm/step</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">30 µm/click</th>
-                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">20 µm/click</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">22 µm/click</th>
               </tr>
             </thead>
@@ -145,10 +145,8 @@ export default function GrindPage() {
               {tableRows.map((row, i) => (
                 <tr key={row.microns} className={i < tableRows.length - 1 ? "border-b border-border" : ""}>
                   <td className="px-4 py-3 font-medium text-text-primary">{row.microns}</td>
+                  <td className="px-4 py-3 text-text-secondary">{row.wilfa}</td>
                   <td className="px-4 py-3 text-text-secondary">{row.comandante}</td>
-                  <td className="px-4 py-3 text-text-secondary">
-                    {row.kultra !== null ? row.kultra : <span className="text-text-secondary/40">—</span>}
-                  </td>
                   <td className="px-4 py-3 text-text-secondary">{row.zp6}</td>
                 </tr>
               ))}
