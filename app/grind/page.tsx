@@ -3,6 +3,7 @@ import type { Metadata } from "next";
 export const metadata: Metadata = { title: "Grind Guide — Coffee Notes" };
 
 const MAX_MICRONS = 1400;
+const WILFA_STEP_MICRONS = 35; // 1–41 scale covering ~0–1400 µm
 
 const brewMethods = [
   { name: "Turkish",        min: 0,   max: 200  },
@@ -18,134 +19,137 @@ const brewMethods = [
 ];
 
 const scaleLabels = [0, 200, 400, 600, 800, 1000, 1200, 1400];
-const descriptors = [
-  { label: "Extra Fine", min: 0,    max: 200  },
-  { label: "Fine",       min: 200,  max: 400  },
-  { label: "Med Fine",   min: 400,  max: 600  },
-  { label: "Medium",     min: 600,  max: 800  },
-  { label: "Med Coarse", min: 800,  max: 1000 },
-  { label: "Coarse",     min: 1000, max: 1200 },
-  { label: "X Coarse",   min: 1200, max: 1400 },
-];
 
-const comandanteClicks = [0, 10, 20, 30, 40];
+// Wilfa Uniform positions 1–41; position n ≈ (n–1) × 35 µm
+const wilfaPositions = [1, 10, 20, 30, 40];
 
-const conversionRows = [
-  { clicks: 5,  microns: 150,  descriptor: "Extra Fine"   },
-  { clicks: 10, microns: 300,  descriptor: "Fine"         },
-  { clicks: 15, microns: 450,  descriptor: "Fine"         },
-  { clicks: 17, microns: 510,  descriptor: "Fine (pour over)" },
-  { clicks: 20, microns: 600,  descriptor: "Medium"       },
-  { clicks: 22, microns: 660,  descriptor: "Medium/Coarse" },
-  { clicks: 24, microns: 720,  descriptor: "Medium"       },
-  { clicks: 28, microns: 840,  descriptor: "Medium Coarse" },
-  { clicks: 30, microns: 900,  descriptor: "Medium Coarse" },
-  { clicks: 35, microns: 1050, descriptor: "Coarse"       },
-  { clicks: 40, microns: 1200, descriptor: "Coarse"       },
-  { clicks: 45, microns: 1350, descriptor: "Super Coarse" },
-];
+function wilfaToMicrons(pos: number) {
+  return (pos - 1) * WILFA_STEP_MICRONS;
+}
 
 function pct(microns: number) {
   return `${(microns / MAX_MICRONS) * 100}%`;
 }
+
+// Comparison table rows (µm → settings per grinder)
+// K-Ultra: 20 µm/click, max ~760 µm
+// ZP6: 22 µm/click
+// Comandante C40: 30 µm/click
+const tableRows = [
+  { microns: 200  },
+  { microns: 400  },
+  { microns: 600  },
+  { microns: 800  },
+  { microns: 1000 },
+  { microns: 1200 },
+].map((r) => ({
+  microns: r.microns,
+  comandante: Math.round(r.microns / 30),
+  kultra: r.microns <= 760 ? Math.round(r.microns / 20) : null,
+  zp6: Math.round(r.microns / 22),
+}));
 
 export default function GrindPage() {
   return (
     <div className="space-y-10">
       <div>
         <h1 className="font-display text-3xl text-text-primary mb-1">Grind Guide</h1>
-        <p className="text-text-secondary text-sm">Comandante C40 · 1 click ≈ 30 µm</p>
+        <p className="text-text-secondary text-sm">Based on Wilfa Uniform · 1 step ≈ 35 µm</p>
       </div>
 
-      {/* Chart */}
+      {/* Range chart */}
       <div>
         <h2 className="font-label text-xs font-medium text-text-secondary uppercase tracking-wide mb-4">
           Brew Method Ranges
         </h2>
-        <div>
-          <div>
 
-            {/* Click scale */}
-            <div className="relative h-5 mb-1">
-              {comandanteClicks.map((clicks, i) => (
-                <span
-                  key={i}
-                  className="absolute text-xs font-label text-accent"
-                  style={{ left: pct(clicks * 30), transform: clicks === 40 ? 'translateX(-100%)' : clicks === 0 ? 'none' : 'translateX(-50%)' }}
-                >
-                  {clicks}
-                </span>
-              ))}
-            </div>
-            <div className="text-xs font-label text-accent mb-2 text-right pr-1">clicks</div>
-
-            {/* Bars */}
-            <div className="space-y-2">
-              {brewMethods.map((method) => (
-                <div key={method.name} className="relative h-9 bg-warm-white rounded-lg">
-                  <div
-                    className="absolute top-0 h-full bg-accent/80 rounded-lg flex items-center px-2"
-                    style={{ left: pct(method.min), width: pct(method.max - method.min) }}
-                  >
-                    <span className="text-xs font-label font-medium text-white truncate">
-                      {method.name}
-                    </span>
-                  </div>
-                </div>
-              ))}
-            </div>
-
-            {/* µm scale */}
-            <div className="relative h-5 mt-2 border-t border-border">
-              {scaleLabels.map((val, i) => (
-                <span
-                  key={i}
-                  className="absolute text-xs font-label text-text-secondary pt-1"
-                  style={{ left: pct(val), transform: val === 1400 ? 'translateX(-100%)' : val === 0 ? 'none' : 'translateX(-50%)' }}
-                >
-                  {val}
-                </span>
-              ))}
-            </div>
-            <div className="text-xs font-label text-text-secondary mt-4">µm</div>
-
-            {/* Descriptor band */}
-            <div className="relative h-6 mt-1">
-              {descriptors.map((d) => (
-                <span
-                  key={d.label}
-                  className="absolute text-xs font-label text-text-secondary -translate-x-1/2 hidden sm:inline"
-                  style={{ left: pct((d.min + d.max) / 2) }}
-                >
-                  {d.label}
-                </span>
-              ))}
-            </div>
-
-          </div>
+        {/* Wilfa Uniform scale */}
+        <div className="relative h-5 mb-1">
+          {wilfaPositions.map((pos) => {
+            const microns = wilfaToMicrons(pos);
+            const isFirst = pos === wilfaPositions[0];
+            const isLast = pos === wilfaPositions[wilfaPositions.length - 1];
+            return (
+              <span
+                key={pos}
+                className="absolute text-xs font-label text-accent"
+                style={{
+                  left: pct(microns),
+                  transform: isLast ? "translateX(-100%)" : isFirst ? "none" : "translateX(-50%)",
+                }}
+              >
+                {pos}
+              </span>
+            );
+          })}
         </div>
+        <div className="text-xs font-label text-accent mb-2 text-right">Wilfa Uniform</div>
+
+        {/* Bars */}
+        <div className="space-y-2">
+          {brewMethods.map((method) => (
+            <div key={method.name} className="relative h-9 bg-warm-white rounded-lg">
+              <div
+                className="absolute top-0 h-full bg-accent/80 rounded-lg flex items-center px-2"
+                style={{ left: pct(method.min), width: pct(method.max - method.min) }}
+              >
+                <span className="text-xs font-label font-medium text-white truncate">
+                  {method.name}
+                </span>
+              </div>
+            </div>
+          ))}
+        </div>
+
+        {/* µm scale */}
+        <div className="relative h-5 mt-2 border-t border-border">
+          {scaleLabels.map((val) => (
+            <span
+              key={val}
+              className="absolute text-xs font-label text-text-secondary pt-1"
+              style={{
+                left: pct(val),
+                transform: val === 1400 ? "translateX(-100%)" : val === 0 ? "none" : "translateX(-50%)",
+              }}
+            >
+              {val}
+            </span>
+          ))}
+        </div>
+        <div className="text-xs font-label text-text-secondary mt-4">µm</div>
       </div>
 
-      {/* Conversion table */}
+      {/* Grinder comparison table */}
       <div>
-        <h2 className="font-label text-xs font-medium text-text-secondary uppercase tracking-wide mb-3">
-          Click Conversion Table
+        <h2 className="font-label text-xs font-medium text-text-secondary uppercase tracking-wide mb-1">
+          Grinder Comparison
         </h2>
+        <p className="text-xs text-text-secondary mb-3">Approximate clicks to reach each grind size.</p>
         <div className="bg-surface border border-border rounded-2xl overflow-hidden">
           <table className="w-full text-sm">
             <thead>
               <tr className="border-b border-border bg-warm-white">
-                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Clicks</th>
-                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Microns</th>
-                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Description</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">µm</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Comandante C40</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso K-Ultra</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso ZP6</th>
+              </tr>
+              <tr className="border-b border-border bg-warm-white">
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">step size</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">30 µm/click</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">20 µm/click</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">22 µm/click</th>
               </tr>
             </thead>
             <tbody>
-              {conversionRows.map((row, i) => (
-                <tr key={row.clicks} className={i < conversionRows.length - 1 ? "border-b border-border" : ""}>
-                  <td className="px-4 py-3 font-medium text-accent">{row.clicks}</td>
-                  <td className="px-4 py-3 text-text-primary">{row.microns} µm</td>
-                  <td className="px-4 py-3 text-text-secondary">{row.descriptor}</td>
+              {tableRows.map((row, i) => (
+                <tr key={row.microns} className={i < tableRows.length - 1 ? "border-b border-border" : ""}>
+                  <td className="px-4 py-3 font-medium text-text-primary">{row.microns}</td>
+                  <td className="px-4 py-3 text-text-secondary">{row.comandante}</td>
+                  <td className="px-4 py-3 text-text-secondary">
+                    {row.kultra !== null ? row.kultra : <span className="text-text-secondary/40">—</span>}
+                  </td>
+                  <td className="px-4 py-3 text-text-secondary">{row.zp6}</td>
                 </tr>
               ))}
             </tbody>
