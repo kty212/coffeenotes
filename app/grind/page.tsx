@@ -28,7 +28,7 @@ const descriptors = [
   { label: "X Coarse",   min: 1200, max: 1400 },
 ];
 
-const comandanteClicks = [0, 7, 13, 20, 27, 33, 40, 47];
+const comandanteClicks = [0, 10, 20, 30, 40];
 
 const conversionRows = [
   { clicks: 5,  microns: 150,  descriptor: "Extra Fine"   },
@@ -62,16 +62,16 @@ export default function GrindPage() {
         <h2 className="font-label text-xs font-medium text-text-secondary uppercase tracking-wide mb-4">
           Brew Method Ranges
         </h2>
-        <div className="overflow-x-auto">
-          <div className="min-w-[560px]">
+        <div>
+          <div>
 
             {/* Click scale */}
             <div className="relative h-5 mb-1">
               {comandanteClicks.map((clicks, i) => (
                 <span
                   key={i}
-                  className="absolute text-xs font-label text-accent -translate-x-1/2"
-                  style={{ left: pct(clicks * 30) }}
+                  className="absolute text-xs font-label text-accent"
+                  style={{ left: pct(clicks * 30), transform: clicks === 40 ? 'translateX(-100%)' : clicks === 0 ? 'none' : 'translateX(-50%)' }}
                 >
                   {clicks}
                 </span>
@@ -100,8 +100,8 @@ export default function GrindPage() {
               {scaleLabels.map((val, i) => (
                 <span
                   key={i}
-                  className="absolute text-xs font-label text-text-secondary -translate-x-1/2 pt-1"
-                  style={{ left: pct(val) }}
+                  className="absolute text-xs font-label text-text-secondary pt-1"
+                  style={{ left: pct(val), transform: val === 1400 ? 'translateX(-100%)' : val === 0 ? 'none' : 'translateX(-50%)' }}
                 >
                   {val}
                 </span>
@@ -114,7 +114,7 @@ export default function GrindPage() {
               {descriptors.map((d) => (
                 <span
                   key={d.label}
-                  className="absolute text-xs font-label text-text-secondary -translate-x-1/2"
+                  className="absolute text-xs font-label text-text-secondary -translate-x-1/2 hidden sm:inline"
                   style={{ left: pct((d.min + d.max) / 2) }}
                 >
                   {d.label}

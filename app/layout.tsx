@@ -76,6 +76,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
               Coffee Notes
             </a>
             <nav className="flex items-center gap-4">
+              <a href="/" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Recipes</a>
               <a href="/grind" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Grind</a>
               <a href="/filters" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Filters</a>
             </nav>
