@@ -100,7 +100,7 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 94,
     grindSize: "660–780 µm · Medium/Coarse",
-    filter: "Orea Wave",
+    filter: "The timings of this recipe are based on using our Flat paper filter with the Negotiator. For Wave or SIBARIST FAST, we recommend to use a slightly finer grind size. Adapt to taste.",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
@@ -121,7 +121,7 @@ export const recipes: Recipe[] = [
     ratio: 16.67,
     waterTempC: 92,
     grindSize: "600–720 µm · Medium",
-    filter: "Orea Wave",
+    filter: "The timings of this recipe are based on using our Flat paper filter with the Negotiator. For Wave or SIBARIST FAST, we recommend to use a slightly finer grind size. Adapt to taste.",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 40, note: "Spiral pour" },
@@ -141,7 +141,7 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 90,
     grindSize: "510–600 µm · Fine",
-    filter: "Orea Wave",
+    filter: "The timings of this recipe are based on using our WAVE paper filter. For SIBARIST FAST, maintain the same approach. For our flat paper with the Negotiator, grind coarser.",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
