@@ -22,7 +22,8 @@ export default function RecipeCard({ recipe }: Props) {
             <p className="text-sm text-text-secondary mt-1 line-clamp-2">{recipe.description}</p>
           )}
         </div>
-        <div className="grid grid-cols-2 gap-2 mt-4">
+        <div className="grid grid-cols-3 gap-2 mt-4">
+          <Stat label="Dose" value={`${recipe.defaultDose}g`} />
           <Stat label="Ratio" value={`1:${recipe.ratio}`} />
           <Stat label="Temp" value={`${recipe.waterTempC}°C`} />
           <Stat label="Grind" value={recipe.grindSize} />

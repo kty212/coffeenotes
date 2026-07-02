@@ -250,6 +250,23 @@ export const recipes: Recipe[] = [
     notes: "Water temp: 92–94°C.",
   },
   {
+    id: "v60-archers-fermented-naturals",
+    name: "Fermented Naturals",
+    brewerId: "v60",
+    defaultDose: 15,
+    ratio: 16,
+    waterTempC: 91,
+    grindSize: "700–800 µm · Medium",
+    totalBrewTimeSec: 165,
+    pouringSchedule: [
+      { timeSeconds: 0,   pourGrams: 40,  note: "Bloom — circular pour" },
+      { timeSeconds: 60,  pourGrams: 140, note: "Circular pour to 140g" },
+      { timeSeconds: 120, pourGrams: 240, note: "Circular + gentle center to 240g" },
+    ],
+    notes: "Dripping should complete by 2:00–2:30. Adjust grind coarser if draining slower than 2:30.",
+    sourceUrl: "https://archerscoffee.com/blogs/news/brewing-guide",
+  },
+  {
     id: "april-filter-16g",
     name: "April Filter 16.5g",
     brewerId: "april",
