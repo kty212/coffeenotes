@@ -2,36 +2,27 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Grind Guide — Coffee Notes" };
 
-const MAX_MICRONS = 1020;
-const WILFA_STEP_MICRONS = 25.5; // 1–41 scale; setting 41 ≈ 1020 µm
+const MIN_MICRONS = 200;
+const MAX_MICRONS = 1600;
+const WILFA_STEP_MICRONS = 25.5; // used in comparison table only
 
-// Ranges derived from Wilfa Uniform settings (honestcoffeeguide.com/wilfa-uniform-grind-settings/)
-// microns = (setting - 1) × 25.5
+// Ranges from KRUVE universal grind size reference (kruveinc.com/pages/brew-guide)
 const brewMethods = [
-  { name: "Espresso",       min: 0,   max: 204 }, // settings 1–9
-  { name: "Filter Machine", min: 128, max: 867 }, // settings 6–35
-  { name: "AeroPress",      min: 153, max: 943 }, // settings 7–38
-  { name: "Moka Pot",       min: 204, max: 561 }, // settings 9–23
-  { name: "Siphon",         min: 204, max: 740 }, // settings 9–30
-  { name: "V60",            min: 255, max: 612 }, // settings 11–25
-  { name: "Pour Over",      min: 255, max: 893 }, // settings 11–36
-  { name: "Cupping",        min: 332, max: 791 }, // settings 14–32
-  { name: "French Press",   min: 612, max: 1020 }, // settings 25–41
-  { name: "Cold Brew",      min: 765, max: 1020 }, // settings 31–41
-  { name: "Cold Drip",      min: 791, max: 1020 }, // settings 32–41
+  { name: "Espresso",     min: 200, max: 500  },
+  { name: "Percolator",   min: 200, max: 700  },
+  { name: "AeroPress",    min: 300, max: 700  },
+  { name: "SCA Cupping",  min: 300, max: 800  },
+  { name: "Syphon",       min: 400, max: 800  },
+  { name: "Drip",         min: 400, max: 1200 },
+  { name: "Pour Over",    min: 500, max: 1200 },
+  { name: "French Press", min: 600, max: 1400 },
+  { name: "Cold Brew",    min: 700, max: 1600 },
 ];
 
-const scaleLabels = [0, 200, 400, 600, 800, 1000, 1020];
-
-// Wilfa Uniform positions 1–41; position n ≈ (n–1) × 25.5 µm
-const wilfaPositions = [1, 10, 20, 30, 41];
-
-function wilfaToMicrons(pos: number) {
-  return (pos - 1) * WILFA_STEP_MICRONS;
-}
+const scaleLabels = [200, 400, 600, 800, 1000, 1200, 1400, 1600];
 
 function pct(microns: number) {
-  return `${(microns / MAX_MICRONS) * 100}%`;
+  return `${((microns - MIN_MICRONS) / (MAX_MICRONS - MIN_MICRONS)) * 100}%`;
 }
 
 // Comparison table rows (µm → settings per grinder)
@@ -56,7 +47,7 @@ export default function GrindPage() {
     <div className="space-y-10">
       <div>
         <h1 className="font-display text-3xl text-text-primary mb-1">Grind Guide</h1>
-        <p className="text-text-secondary text-sm">Based on Wilfa Uniform · 1 step ≈ 25.5 µm · max setting 41 ≈ 1020 µm</p>
+        <p className="text-text-secondary text-sm">Universal grind size reference · Source: KRUVE</p>
       </div>
 
       {/* Range chart */}
@@ -64,28 +55,6 @@ export default function GrindPage() {
         <h2 className="font-label text-xs font-medium text-text-secondary uppercase tracking-wide mb-4">
           Brew Method Ranges
         </h2>
-
-        {/* Wilfa Uniform scale */}
-        <div className="relative h-5 mb-1">
-          {wilfaPositions.map((pos) => {
-            const microns = wilfaToMicrons(pos);
-            const isFirst = pos === wilfaPositions[0];
-            const isLast = pos === wilfaPositions[wilfaPositions.length - 1];
-            return (
-              <span
-                key={pos}
-                className="absolute text-xs font-label text-accent"
-                style={{
-                  left: pct(microns),
-                  transform: isLast ? "translateX(-100%)" : isFirst ? "none" : "translateX(-50%)",
-                }}
-              >
-                {pos}
-              </span>
-            );
-          })}
-        </div>
-        <div className="text-xs font-label text-accent mb-2 text-right">Wilfa Uniform</div>
 
         {/* Bars */}
         <div className="space-y-2">
@@ -111,7 +80,7 @@ export default function GrindPage() {
               className="absolute text-xs font-label text-text-secondary pt-1"
               style={{
                 left: pct(val),
-                transform: val === 1020 ? "translateX(-100%)" : val === 0 ? "none" : "translateX(-50%)",
+                transform: val === 1600 ? "translateX(-100%)" : val === 200 ? "none" : "translateX(-50%)",
               }}
             >
               {val}
