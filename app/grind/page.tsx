@@ -2,28 +2,28 @@ import type { Metadata } from "next";
 
 export const metadata: Metadata = { title: "Grind Guide — Coffee Notes" };
 
-const MAX_MICRONS = 1400;
-const WILFA_STEP_MICRONS = 35; // 1–41 scale covering ~0–1400 µm
+const MAX_MICRONS = 1020;
+const WILFA_STEP_MICRONS = 25.5; // 1–41 scale; setting 41 ≈ 1020 µm
 
 // Ranges derived from Wilfa Uniform settings (honestcoffeeguide.com/wilfa-uniform-grind-settings/)
-// microns = (setting - 1) × 35
+// microns = (setting - 1) × 25.5
 const brewMethods = [
-  { name: "Espresso",       min: 0,    max: 280  }, // settings 1–9
-  { name: "Filter Machine", min: 175,  max: 1190 }, // settings 6–35
-  { name: "AeroPress",      min: 210,  max: 1295 }, // settings 7–38
-  { name: "Moka Pot",       min: 280,  max: 770  }, // settings 9–23
-  { name: "Siphon",         min: 280,  max: 1015 }, // settings 9–30
-  { name: "V60",            min: 350,  max: 840  }, // settings 11–25
-  { name: "Pour Over",      min: 350,  max: 1225 }, // settings 11–36
-  { name: "Cupping",        min: 455,  max: 1085 }, // settings 14–32
-  { name: "French Press",   min: 840,  max: 1400 }, // settings 25–41
-  { name: "Cold Brew",      min: 1050, max: 1400 }, // settings 31–41
-  { name: "Cold Drip",      min: 1085, max: 1400 }, // settings 32–41
+  { name: "Espresso",       min: 0,   max: 204 }, // settings 1–9
+  { name: "Filter Machine", min: 128, max: 867 }, // settings 6–35
+  { name: "AeroPress",      min: 153, max: 943 }, // settings 7–38
+  { name: "Moka Pot",       min: 204, max: 561 }, // settings 9–23
+  { name: "Siphon",         min: 204, max: 740 }, // settings 9–30
+  { name: "V60",            min: 255, max: 612 }, // settings 11–25
+  { name: "Pour Over",      min: 255, max: 893 }, // settings 11–36
+  { name: "Cupping",        min: 332, max: 791 }, // settings 14–32
+  { name: "French Press",   min: 612, max: 1020 }, // settings 25–41
+  { name: "Cold Brew",      min: 765, max: 1020 }, // settings 31–41
+  { name: "Cold Drip",      min: 791, max: 1020 }, // settings 32–41
 ];
 
-const scaleLabels = [0, 200, 400, 600, 800, 1000, 1200, 1400];
+const scaleLabels = [0, 200, 400, 600, 800, 1000, 1020];
 
-// Wilfa Uniform positions 1–41; position n ≈ (n–1) × 35 µm
+// Wilfa Uniform positions 1–41; position n ≈ (n–1) × 25.5 µm
 const wilfaPositions = [1, 10, 20, 30, 41];
 
 function wilfaToMicrons(pos: number) {
@@ -35,7 +35,7 @@ function pct(microns: number) {
 }
 
 // Comparison table rows (µm → settings per grinder)
-// Wilfa Uniform: 35 µm/step, scale starts at 1 (step 1 = 0 µm)
+// Wilfa Uniform: ~25.5 µm/step, scale 1–41 (max ~1020 µm)
 // Comandante C40: 30 µm/click
 // ZP6: 22 µm/click
 const tableRows = [
@@ -44,10 +44,9 @@ const tableRows = [
   { microns: 600  },
   { microns: 800  },
   { microns: 1000 },
-  { microns: 1200 },
 ].map((r) => ({
   microns: r.microns,
-  wilfa: Math.round(r.microns / WILFA_STEP_MICRONS) + 1,
+  wilfa: Math.min(41, Math.round(r.microns / WILFA_STEP_MICRONS) + 1),
   comandante: Math.round(r.microns / 30),
   zp6: Math.round(r.microns / 22),
 }));
@@ -57,7 +56,7 @@ export default function GrindPage() {
     <div className="space-y-10">
       <div>
         <h1 className="font-display text-3xl text-text-primary mb-1">Grind Guide</h1>
-        <p className="text-text-secondary text-sm">Based on Wilfa Uniform · 1 step ≈ 35 µm</p>
+        <p className="text-text-secondary text-sm">Based on Wilfa Uniform · 1 step ≈ 25.5 µm · max setting 41 ≈ 1020 µm</p>
       </div>
 
       {/* Range chart */}
@@ -112,7 +111,7 @@ export default function GrindPage() {
               className="absolute text-xs font-label text-text-secondary pt-1"
               style={{
                 left: pct(val),
-                transform: val === 1400 ? "translateX(-100%)" : val === 0 ? "none" : "translateX(-50%)",
+                transform: val === 1020 ? "translateX(-100%)" : val === 0 ? "none" : "translateX(-50%)",
               }}
             >
               {val}
@@ -139,7 +138,7 @@ export default function GrindPage() {
               </tr>
               <tr className="border-b border-border bg-warm-white">
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">step size</th>
-                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">~35 µm/step</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">~25.5 µm/step</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">30 µm/click</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">22 µm/click</th>
               </tr>
