@@ -5,23 +5,26 @@ export const metadata: Metadata = { title: "Grind Guide — Coffee Notes" };
 const MAX_MICRONS = 1400;
 const WILFA_STEP_MICRONS = 35; // 1–41 scale covering ~0–1400 µm
 
+// Ranges derived from Wilfa Uniform settings (honestcoffeeguide.com/wilfa-uniform-grind-settings/)
+// microns = (setting - 1) × 35
 const brewMethods = [
-  { name: "Turkish",        min: 0,   max: 200  },
-  { name: "Espresso",       min: 200, max: 400  },
-  { name: "Moka Pot",       min: 350, max: 550  },
-  { name: "AeroPress",      min: 400, max: 900  },
-  { name: "Pour Over",      min: 500, max: 900  },
-  { name: "Siphon",         min: 450, max: 750  },
-  { name: "Filter Machine", min: 500, max: 900  },
-  { name: "French Press",   min: 700, max: 1100 },
-  { name: "Cold Drip",      min: 800, max: 1200 },
-  { name: "Cold Brew",      min: 900, max: 1400 },
+  { name: "Espresso",       min: 0,    max: 280  }, // settings 1–9
+  { name: "Filter Machine", min: 175,  max: 1190 }, // settings 6–35
+  { name: "AeroPress",      min: 210,  max: 1295 }, // settings 7–38
+  { name: "Moka Pot",       min: 280,  max: 770  }, // settings 9–23
+  { name: "Siphon",         min: 280,  max: 1015 }, // settings 9–30
+  { name: "V60",            min: 350,  max: 840  }, // settings 11–25
+  { name: "Pour Over",      min: 350,  max: 1225 }, // settings 11–36
+  { name: "Cupping",        min: 455,  max: 1085 }, // settings 14–32
+  { name: "French Press",   min: 840,  max: 1400 }, // settings 25–41
+  { name: "Cold Brew",      min: 1050, max: 1400 }, // settings 31–41
+  { name: "Cold Drip",      min: 1085, max: 1400 }, // settings 32–41
 ];
 
 const scaleLabels = [0, 200, 400, 600, 800, 1000, 1200, 1400];
 
 // Wilfa Uniform positions 1–41; position n ≈ (n–1) × 35 µm
-const wilfaPositions = [1, 10, 20, 30, 40];
+const wilfaPositions = [1, 10, 20, 30, 41];
 
 function wilfaToMicrons(pos: number) {
   return (pos - 1) * WILFA_STEP_MICRONS;

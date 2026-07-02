@@ -100,7 +100,7 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 94,
     grindSize: "660–780 µm · Medium/Coarse",
-    filter: "The timings of this recipe are based on using our Flat paper filter with the Negotiator. For Wave or SIBARIST FAST, we recommend to use a slightly finer grind size. Adapt to taste.",
+    filter: "Orea Flat Paper + Negotiator",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
@@ -109,7 +109,7 @@ export const recipes: Recipe[] = [
       { timeSeconds: 105, pourGrams: 50, note: "Spiral pour" },
       { timeSeconds: 135, pourGrams: 50, note: "Spiral pour" },
     ],
-    notes: "Brewer: V4 Narrow + Fast Bottom. Draw-down complete by 2:30–3:00.",
+    notes: "Brewer: V4 Narrow + Fast Bottom. Draw-down complete by 2:30–3:00. For Wave or SIBARIST FAST, use a slightly finer grind.",
     sourceUrl: "https://www.orea.uk/guides-v4",
   },
   {
@@ -121,7 +121,7 @@ export const recipes: Recipe[] = [
     ratio: 16.67,
     waterTempC: 92,
     grindSize: "600–720 µm · Medium",
-    filter: "The timings of this recipe are based on using our Flat paper filter with the Negotiator. For Wave or SIBARIST FAST, we recommend to use a slightly finer grind size. Adapt to taste.",
+    filter: "Orea Flat Paper + Negotiator",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 40, note: "Spiral pour" },
@@ -129,7 +129,7 @@ export const recipes: Recipe[] = [
       { timeSeconds: 80, pourGrams: 60, note: "Spiral pour" },
       { timeSeconds: 120, pourGrams: 50, note: "Spiral pour" },
     ],
-    notes: "Brewer: V4 Narrow + Open Bottom. Draw-down complete by 2:30–3:00.",
+    notes: "Brewer: V4 Narrow + Open Bottom. Draw-down complete by 2:30–3:00. For Wave or SIBARIST FAST, use a slightly finer grind.",
     sourceUrl: "https://www.orea.uk/guides-v4",
   },
   {
@@ -141,13 +141,13 @@ export const recipes: Recipe[] = [
     ratio: 16.25,
     waterTempC: 90,
     grindSize: "510–600 µm · Fine",
-    filter: "The timings of this recipe are based on using our WAVE paper filter. For SIBARIST FAST, maintain the same approach. For our flat paper with the Negotiator, grind coarser.",
+    filter: "Orea Wave",
     totalBrewTimeSec: 180,
     pouringSchedule: [
       { timeSeconds: 0, pourGrams: 60, note: "Spiral pour" },
       { timeSeconds: 40, pourGrams: 200, note: "Spiral pour slowly (4 g/s)" },
     ],
-    notes: "Brewer: V4 Narrow + Fast Bottom. Draw-down complete by 2:30–3:00.",
+    notes: "Brewer: V4 Narrow + Fast Bottom. Draw-down complete by 2:30–3:00. For flat paper with Negotiator, grind coarser.",
     sourceUrl: "https://www.orea.uk/guides-v4",
   },
   {
