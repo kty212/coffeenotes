@@ -252,6 +252,7 @@ export const recipes: Recipe[] = [
   {
     id: "v60-archers-fermented-naturals",
     name: "Fermented Naturals",
+    description: "Archers Coffee's recommended filter recipe for fermented naturals. A 3-pour method designed to highlight sweetness and body.",
     brewerId: "v60",
     defaultDose: 15,
     ratio: 16,
