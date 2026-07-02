@@ -11,8 +11,8 @@ export default function RecipeCard({ recipe }: Props) {
   const brewer = getBrewerById(recipe.brewerId);
 
   return (
-    <Link href={`/recipe/${recipe.id}`} className="block h-full">
-      <div className="bg-surface border border-border rounded-2xl p-5 hover:border-accent transition-colors h-full flex flex-col">
+    <Link href={`/recipe/${recipe.id}`} className="flex flex-col">
+      <div className="bg-surface border border-border rounded-2xl p-5 hover:border-accent transition-colors flex flex-col flex-1">
         <div className="mb-3 flex-1">
           <span className="text-xs font-label font-medium text-accent uppercase tracking-wide">
             {brewer?.name}
