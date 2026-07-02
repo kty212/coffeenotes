@@ -37,7 +37,7 @@ function Stat({ label, value }: { label: string; value: string }) {
   return (
     <div className="bg-warm-white rounded-lg px-3 py-2">
       <div className="text-xs text-text-secondary font-label">{label}</div>
-      <div className="text-sm font-medium text-text-primary mt-0.5">{value}</div>
+      <div className="text-sm font-medium text-text-primary mt-0.5 truncate">{value}</div>
     </div>
   );
 }
