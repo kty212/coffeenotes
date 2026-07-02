@@ -47,7 +47,17 @@ export default function GrindPage() {
     <div className="space-y-10">
       <div>
         <h1 className="font-display text-3xl text-text-primary mb-1">Grind Guide</h1>
-        <p className="text-text-secondary text-sm">Universal grind size reference · Source: KRUVE</p>
+        <p className="text-text-secondary text-sm">
+          Universal grind size reference ·{" "}
+          <a
+            href="https://www.kruveinc.com/pages/brew-guide"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-1 hover:text-accent transition-colors"
+          >
+            Source ↗
+          </a>
+        </p>
       </div>
 
       {/* Range chart */}
