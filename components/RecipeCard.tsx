@@ -28,9 +28,6 @@ export default function RecipeCard({ recipe }: Props) {
           <Stat label="Grind" value={recipe.grindSize} />
           <Stat label="Time" value={formatTime(recipe.totalBrewTimeSec)} />
         </div>
-        <p className="text-xs text-text-secondary mt-2">
-          {recipe.defaultDose * recipe.ratio}g water · 1:{recipe.ratio} ratio
-        </p>
       </div>
     </Link>
   );

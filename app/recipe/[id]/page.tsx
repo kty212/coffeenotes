@@ -47,7 +47,7 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
         <StatBox label="Time" value={formatTime(recipe.totalBrewTimeSec)} />
       </div>
       <p className="text-xs text-text-secondary">
-        {recipe.defaultDose * recipe.ratio}g water · 1:{recipe.ratio} ratio
+        {Math.round(recipe.defaultDose * recipe.ratio)}g water · 1:{recipe.ratio} ratio
       </p>
 
       {/* Filter */}
