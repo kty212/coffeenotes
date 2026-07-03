@@ -30,7 +30,7 @@ export default function HomeContent() {
         </p>
       </div>
 
-      <div className="flex items-center justify-between gap-3">
+      <div className="flex items-end justify-between gap-3">
         <BrewerFilter selected={selectedBrewer} onChange={setSelectedBrewer} />
         <select
           value={sortBy}

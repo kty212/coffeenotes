@@ -304,6 +304,7 @@ export const recipes: Recipe[] = [
       { timeSeconds: 60, pourGrams: 0,   note: "Open the switch — allow to drain" },
     ],
     notes: "Rinse the filter before brewing. Stir gently at 0:00, more vigorously at 0:30. Open the switch at 1:00 and let it drain completely.",
+    sourceUrl: "https://www.instagram.com/daiki_hatakeyama_coffee/",
   },
   {
     id: "april-filter-16g",
