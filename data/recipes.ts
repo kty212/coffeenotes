@@ -6,7 +6,7 @@ export const brewers: Brewer[] = [
   { id: "orea-o1", name: "Orea O1" },
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
-  { id: "hario-neo-switch", name: "Hario Neo 01 + Switch" },
+  { id: "hario-neo-switch", name: "Hario Neo" },
 ];
 
 export const recipes: Recipe[] = [
