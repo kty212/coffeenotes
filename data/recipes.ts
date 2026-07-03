@@ -298,7 +298,7 @@ export const recipes: Recipe[] = [
     defaultDose: 15,
     ratio: 13.33,
     waterTempC: 92,
-    grindSize: "700 µm · Size 7",
+    grindSize: "700 µm",
     totalBrewTimeSec: 130,
     pouringSchedule: [
       { timeSeconds: 0,   pourGrams: 100, note: "Percolation — circular pour (switch open)" },
@@ -306,7 +306,7 @@ export const recipes: Recipe[] = [
       { timeSeconds: 60,  pourGrams: 100, note: "Immersion pour" },
       { timeSeconds: 120, pourGrams: 0,   note: "Open the switch" },
     ],
-    notes: "Coffee: Panama Geisha Finca Nuguo Anaerobic Natural. Grinder: Option-O Lagom 01 at Size 7, RPM 3 (580RPM). Water: 50PPM. Dripper: UFO V3 + Hario Switch Base.",
+    notes: "Grinder: Option-O Lagom 01 at Size 7, RPM 3 (580RPM). Water: 50PPM. Dripper: UFO V3 + Hario Switch Base.",
     sourceUrl: "https://ufocoffeetools.com/article/notice/1/8/",
   },
   {
