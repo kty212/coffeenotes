@@ -7,6 +7,7 @@ export const brewers: Brewer[] = [
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
   { id: "hario-neo-switch", name: "Hario Neo" },
+  { id: "hario-switch", name: "Hario Switch" },
   { id: "origami", name: "Origami Dripper" },
 ];
 
@@ -308,6 +309,23 @@ export const recipes: Recipe[] = [
     ],
     notes: "Grinder: Option-O Lagom 01 at Size 7, RPM 3 (580RPM). Water: 50PPM. Dripper: UFO V3 + Hario Switch Base.",
     sourceUrl: "https://ufocoffeetools.com/article/notice/1/8/",
+  },
+  {
+    id: "hario-switch-emi-fukahori",
+    name: "Emi Fukahori's Recipe",
+    description: "A clean two-phase recipe by World Brewers Cup champion Emi Fukahori. Closed-valve bloom, then open and pour in a single continuous stream.",
+    brewerId: "hario-switch",
+    defaultDose: 14,
+    ratio: 14.29,
+    waterTempC: 93,
+    grindSize: "25 clicks (Comandante C40)",
+    totalBrewTimeSec: 140,
+    pouringSchedule: [
+      { timeSeconds: 0,  pourGrams: 50,  note: "Valve closed — bloom" },
+      { timeSeconds: 30, pourGrams: 150, note: "Open valve — single continuous centre pour, finish by 1:10" },
+    ],
+    notes: "Keep the pour to the centre of the coffee bed. Target finish: 1:10 pouring, 2:20 total brew time.",
+    sourceUrl: "https://www.youtube.com/watch?v=3euEkTBxtEk",
   },
   {
     id: "hario-neo-switch-daiki",
