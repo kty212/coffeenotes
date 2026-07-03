@@ -317,13 +317,13 @@ export const recipes: Recipe[] = [
     defaultDose: 14,
     ratio: 14.29,
     waterTempC: 93,
-    grindSize: "25 clicks (Comandante C40)",
+    grindSize: "750 µm",
     totalBrewTimeSec: 140,
     pouringSchedule: [
       { timeSeconds: 0,  pourGrams: 50,  note: "Valve closed — bloom" },
       { timeSeconds: 30, pourGrams: 150, note: "Open valve — single continuous centre pour, finish by 1:10" },
     ],
-    notes: "Keep the pour to the centre of the coffee bed. Target finish: 1:10 pouring, 2:20 total brew time.",
+    notes: "Grind size: 25 clicks (Comandante C40) Keep the pour to the centre of the coffee bed. Target finish: 1:10 pouring, 2:20 total brew time.",
     sourceUrl: "https://www.youtube.com/watch?v=3euEkTBxtEk",
   },
   {
