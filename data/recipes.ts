@@ -2,7 +2,6 @@ import type { Brewer, Recipe } from "@/types/recipe";
 
 export const brewers: Brewer[] = [
   { id: "v60", name: "Hario V60" },
-  { id: "hario-switch", name: "Hario Switch" },
   { id: "orea-v4", name: "Orea V4" },
   { id: "orea-o1", name: "Orea O1" },
   { id: "april", name: "April Brewer" },
@@ -314,7 +313,7 @@ export const recipes: Recipe[] = [
     id: "hario-switch-emi-fukahori",
     name: "Emi Fukahori's Recipe",
     description: "A clean two-phase recipe by World Brewers Cup champion Emi Fukahori. Closed-valve bloom, then open and pour in a single continuous stream.",
-    brewerId: "hario-switch",
+    brewerId: "v60",
     defaultDose: 14,
     ratio: 14.29,
     waterTempC: 93,
