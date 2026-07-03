@@ -7,6 +7,7 @@ export const brewers: Brewer[] = [
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
   { id: "hario-neo-switch", name: "Hario Neo" },
+  { id: "origami", name: "Origami Dripper" },
 ];
 
 export const recipes: Recipe[] = [
@@ -306,6 +307,25 @@ export const recipes: Recipe[] = [
     ],
     notes: "Rinse the filter before brewing. Stir gently at 0:00, more vigorously at 0:30. Open the switch at 1:00 and let it drain completely.",
     sourceUrl: "https://www.instagram.com/daiki_hatakeyama_coffee/",
+  },
+  {
+    id: "origami-kurasu",
+    name: "Kurasu Recipe",
+    description: "Kurasu's signature Origami recipe. Fine grind and high ratio for a clean, sweet, mild extraction. Remove the dripper at 1:20 even if water remains.",
+    brewerId: "origami",
+    defaultDose: 15,
+    ratio: 18,
+    waterTempC: 89,
+    grindSize: "Fine (slightly finer than V60)",
+    filter: "Hario V60 or Kalita Wave Paper",
+    totalBrewTimeSec: 80,
+    pouringSchedule: [
+      { timeSeconds: 0,  pourGrams: 40,  note: "Circular pour" },
+      { timeSeconds: 30, pourGrams: 130, note: "Slowly pour to 170g" },
+      { timeSeconds: 60, pourGrams: 100, note: "Pour remaining to 270g" },
+    ],
+    notes: "Remove the dripper from the server at 1:20 even if water remains — stopping extraction on time avoids unpleasant flavours. Rinse the filter beforehand.",
+    sourceUrl: "https://kurasu.kyoto/blogs/kurasu-journal/origami-dripper-brewing-recipe-how-we-do-it-at-kurasu",
   },
   {
     id: "april-filter-16g",
