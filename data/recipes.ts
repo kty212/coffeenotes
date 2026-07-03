@@ -297,6 +297,7 @@ export const recipes: Recipe[] = [
     ratio: 11.54,
     waterTempC: 91,
     grindSize: "Medium-Coarse",
+    filter: "Hario V60 Paper (01)",
     totalBrewTimeSec: 150,
     pouringSchedule: [
       { timeSeconds: 0,  pourGrams: 150, note: "Switch closed — stir gently 5 times" },
