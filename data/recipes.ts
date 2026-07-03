@@ -311,7 +311,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "hario-switch-emi-fukahori",
-    name: "Emi Fukahori's Recipe",
+    name: "Emi Fukahori's V60 Switch Recipe",
     description: "A clean two-phase recipe by World Brewers Cup champion Emi Fukahori. Closed-valve bloom, then open and pour in a single continuous stream.",
     brewerId: "v60",
     defaultDose: 14,
