@@ -5,6 +5,7 @@ export const brewers: Brewer[] = [
   { id: "orea-v4", name: "Orea V4" },
   { id: "orea-o1", name: "Orea O1" },
   { id: "april", name: "April Brewer" },
+  { id: "ufo-v3", name: "UFO V3" },
 ];
 
 export const recipes: Recipe[] = [
@@ -266,6 +267,25 @@ export const recipes: Recipe[] = [
     ],
     notes: "Dripping should complete by 2:00–2:30. Adjust grind coarser if draining slower than 2:30.",
     sourceUrl: "https://archerscoffee.com/blogs/news/brewing-guide",
+  },
+  {
+    id: "ufo-v3-nas-jaafar-wbc-2026",
+    name: "WBC 2026 Winning Recipe",
+    description: "Nas Jaafar's 2026 World Brewers Cup winning recipe. A hybrid percolation/immersion method — start with the switch open (percolation), close at 0:58 for immersion, then open again to finish.",
+    brewerId: "ufo-v3",
+    defaultDose: 15,
+    ratio: 13.33,
+    waterTempC: 92,
+    grindSize: "700 µm · Size 7",
+    totalBrewTimeSec: 130,
+    pouringSchedule: [
+      { timeSeconds: 0,   pourGrams: 100, note: "Percolation — circular pour (switch open)" },
+      { timeSeconds: 58,  pourGrams: 0,   note: "Close the switch" },
+      { timeSeconds: 60,  pourGrams: 100, note: "Immersion pour" },
+      { timeSeconds: 120, pourGrams: 0,   note: "Open the switch" },
+    ],
+    notes: "Coffee: Panama Geisha Finca Nuguo Anaerobic Natural. Grinder: Option-O Lagom 01 at Size 7, RPM 3 (580RPM). Water: 50PPM. Dripper: UFO V3 + Hario Switch Base.",
+    sourceUrl: "https://ufocoffeetools.com/article/notice/1/8/",
   },
   {
     id: "april-filter-16g",
