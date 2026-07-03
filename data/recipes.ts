@@ -6,6 +6,7 @@ export const brewers: Brewer[] = [
   { id: "orea-o1", name: "Orea O1" },
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
+  { id: "hario-neo-switch", name: "Hario Neo 01 + Switch" },
 ];
 
 export const recipes: Recipe[] = [
@@ -286,6 +287,23 @@ export const recipes: Recipe[] = [
     ],
     notes: "Coffee: Panama Geisha Finca Nuguo Anaerobic Natural. Grinder: Option-O Lagom 01 at Size 7, RPM 3 (580RPM). Water: 50PPM. Dripper: UFO V3 + Hario Switch Base.",
     sourceUrl: "https://ufocoffeetools.com/article/notice/1/8/",
+  },
+  {
+    id: "hario-neo-switch-daiki",
+    name: "Daiki's Immersion",
+    description: "A clean full-immersion recipe by @daiki_hatakeyama_coffee. Close the switch before pouring, stir twice during the steep, then open at 1:00 to drain.",
+    brewerId: "hario-neo-switch",
+    defaultDose: 13,
+    ratio: 11.54,
+    waterTempC: 91,
+    grindSize: "Medium-Coarse",
+    totalBrewTimeSec: 150,
+    pouringSchedule: [
+      { timeSeconds: 0,  pourGrams: 150, note: "Switch closed — stir gently 5 times" },
+      { timeSeconds: 30, pourGrams: 0,   note: "Stir more vigorously 5 times" },
+      { timeSeconds: 60, pourGrams: 0,   note: "Open the switch — allow to drain" },
+    ],
+    notes: "Rinse the filter before brewing. Stir gently at 0:00, more vigorously at 0:30. Open the switch at 1:00 and let it drain completely.",
   },
   {
     id: "april-filter-16g",
