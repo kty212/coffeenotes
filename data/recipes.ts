@@ -2,12 +2,12 @@ import type { Brewer, Recipe } from "@/types/recipe";
 
 export const brewers: Brewer[] = [
   { id: "v60", name: "Hario V60" },
+  { id: "hario-switch", name: "Hario Switch" },
   { id: "orea-v4", name: "Orea V4" },
   { id: "orea-o1", name: "Orea O1" },
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
   { id: "hario-neo-switch", name: "Hario Neo" },
-  { id: "hario-switch", name: "Hario Switch" },
   { id: "origami", name: "Origami Dripper" },
 ];
 
