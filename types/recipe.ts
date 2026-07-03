@@ -19,6 +19,7 @@ export interface Recipe {
   notes?: string;
   targetTds?: string;
   sourceUrl?: string;
+  tags?: string[];
 }
 
 export interface Brewer {

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { EB_Garamond, DM_Sans, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
+import { SearchProvider } from "@/lib/SearchContext";
+import Header from "@/components/Header";
 import "./globals.css";
 
 const displayFont = EB_Garamond({
@@ -70,19 +72,10 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <header className="sticky top-0 z-10 bg-bg/90 backdrop-blur border-b border-border">
-          <div className="max-w-2xl mx-auto px-4 h-14 flex items-center justify-between">
-            <a href="/" className="font-display text-xl text-text-primary">
-              Coffee Notes
-            </a>
-            <nav className="flex items-center gap-4">
-              <a href="/" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Recipes</a>
-              <a href="/grind" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Grind</a>
-              <a href="/filters" className="text-sm font-label text-text-secondary hover:text-accent transition-colors">Filters</a>
-            </nav>
-          </div>
-        </header>
-        <main className="max-w-2xl mx-auto px-4 py-6">{children}</main>
+        <SearchProvider>
+          <Header />
+          <main className="max-w-2xl mx-auto px-4 py-6">{children}</main>
+        </SearchProvider>
       </body>
     </html>
   );
