@@ -284,8 +284,8 @@ export const recipes: Recipe[] = [
     totalBrewTimeSec: 165,
     pouringSchedule: [
       { timeSeconds: 0,   pourGrams: 40,  note: "Bloom — circular pour" },
-      { timeSeconds: 60,  pourGrams: 140, note: "Circular pour to 140g" },
-      { timeSeconds: 120, pourGrams: 240, note: "Circular + gentle center to 240g" },
+      { timeSeconds: 60,  pourGrams: 100, note: "Circular pour to 140g" },
+      { timeSeconds: 120, pourGrams: 100, note: "Circular + gentle center to 240g" },
     ],
     notes: "Dripping should complete by 2:00–2:30. Adjust grind coarser if draining slower than 2:30.",
     sourceUrl: "https://archerscoffee.com/blogs/news/brewing-guide",
