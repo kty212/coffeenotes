@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Filter Guide — Coffee Notes" };
+export const metadata: Metadata = {
+  title: "Filter Guide",
+  description:
+    "Compare coffee filters for V60, Orea, April, and Origami drippers. Paper vs. metal vs. cloth — flow rate, cup character, and compatibility.",
+};
 
 const filters = [
   {

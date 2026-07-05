@@ -24,8 +24,26 @@ const labelFont = Space_Grotesk({
 });
 
 export const metadata: Metadata = {
-  title: "Coffee Notes",
-  description: "Personal pour-over recipe reference",
+  metadataBase: new URL("https://coffeenotes.fyi"),
+  title: {
+    default: "Coffee Notes — Pour-Over Coffee Recipes & Brew Guides",
+    template: "%s — Coffee Notes",
+  },
+  description:
+    "Curated pour-over coffee recipes for V60, Orea, April, and more. Step-by-step brewing guides with grind sizes, pouring schedules, and tasting notes.",
+  openGraph: {
+    type: "website",
+    siteName: "Coffee Notes",
+    title: "Coffee Notes — Pour-Over Coffee Recipes & Brew Guides",
+    description:
+      "Curated pour-over coffee recipes with step-by-step pouring schedules, grind guides, and filter comparisons.",
+  },
+  twitter: {
+    card: "summary",
+    title: "Coffee Notes — Pour-Over Coffee Recipes & Brew Guides",
+    description:
+      "Curated pour-over coffee recipes with step-by-step pouring schedules, grind guides, and filter comparisons.",
+  },
 };
 
 export default function RootLayout({

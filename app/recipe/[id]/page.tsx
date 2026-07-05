@@ -1,5 +1,6 @@
 import { notFound } from "next/navigation";
 import Link from "next/link";
+import type { Metadata } from "next";
 import { getRecipeById, getBrewerById, recipes } from "@/data/recipes";
 import { formatTime } from "@/lib/recipeUtils";
 import PouringSchedule from "@/components/PouringSchedule";
@@ -8,10 +9,28 @@ export function generateStaticParams() {
   return recipes.map((r) => ({ id: r.id }));
 }
 
-export async function generateMetadata({ params }: { params: Promise<{ id: string }> }) {
+export async function generateMetadata({
+  params,
+}: {
+  params: Promise<{ id: string }>;
+}): Promise<Metadata> {
   const { id } = await params;
   const recipe = getRecipeById(id);
-  return { title: recipe ? `${recipe.name} — Coffee Notes` : "Recipe not found" };
+  if (!recipe) return { title: "Recipe not found" };
+
+  const brewer = getBrewerById(recipe.brewerId);
+  const description =
+    recipe.description ||
+    `${recipe.name} pour-over recipe for ${brewer?.name ?? "coffee"}. ${recipe.defaultDose}g dose, ${recipe.waterTempC}°C, ${formatTime(recipe.totalBrewTimeSec)} brew time.`;
+
+  return {
+    title: `${recipe.name}`,
+    description,
+    openGraph: {
+      title: `${recipe.name} — Coffee Notes`,
+      description,
+    },
+  };
 }
 
 export default async function RecipePage({ params }: { params: Promise<{ id: string }> }) {
@@ -21,8 +40,33 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
 
   const brewer = getBrewerById(recipe.brewerId);
 
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "Recipe",
+    name: recipe.name,
+    description:
+      recipe.description ||
+      `${recipe.name} pour-over recipe for ${brewer?.name ?? "coffee"}.`,
+    recipeCategory: "Beverage",
+    recipeCuisine: "Coffee",
+    totalTime: `PT${Math.ceil(recipe.totalBrewTimeSec / 60)}M`,
+    recipeIngredient: [
+      `${recipe.defaultDose}g coffee`,
+      `${Math.round(recipe.defaultDose * recipe.ratio)}g water at ${recipe.waterTempC}°C`,
+    ],
+    recipeInstructions: recipe.pouringSchedule.map((step, i) => ({
+      "@type": "HowToStep",
+      position: i + 1,
+      text: `At ${formatTime(step.timeSeconds)}: pour ${step.pourGrams}g${step.note ? ` — ${step.note}` : ""}`,
+    })),
+  };
+
   return (
     <div className="space-y-6">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       {/* Back */}
       <Link href="/" className="inline-flex items-center text-sm text-text-secondary hover:text-accent transition-colors gap-1">
         ← All recipes

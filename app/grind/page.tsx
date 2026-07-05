@@ -1,6 +1,10 @@
 import type { Metadata } from "next";
 
-export const metadata: Metadata = { title: "Grind Guide — Coffee Notes" };
+export const metadata: Metadata = {
+  title: "Grind Guide",
+  description:
+    "Coffee grind size chart for every brew method — espresso to cold brew. Includes micron ranges and Wilfa Uniform, Comandante C40, and 1Zpresso K-Max settings.",
+};
 
 const MIN_MICRONS = 200;
 const MAX_MICRONS = 1600;
