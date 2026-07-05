@@ -11,12 +11,12 @@ const brewMethods = [
   { name: "Espresso",     min: 200, max: 500  },
   { name: "Percolator",   min: 200, max: 700  },
   { name: "AeroPress",    min: 300, max: 700  },
-  { name: "SCA Cupping",  min: 300, max: 800  },
-  { name: "Syphon",       min: 400, max: 800  },
+  { name: "SCA Cupping",  min: 400, max: 1200 },
+  { name: "Syphon",       min: 300, max: 1100 },
   { name: "Drip",         min: 400, max: 1200 },
   { name: "Pour Over",    min: 500, max: 1200 },
   { name: "French Press", min: 600, max: 1400 },
-  { name: "Cold Brew",    min: 700, max: 1600 },
+  { name: "Cold Brew",    min: 900, max: 1600 },
 ];
 
 const scaleLabels = [200, 400, 600, 800, 1000, 1200, 1400, 1600];
@@ -25,10 +25,16 @@ function pct(microns: number) {
   return `${((microns - MIN_MICRONS) / (MAX_MICRONS - MIN_MICRONS)) * 100}%`;
 }
 
+function widthPct(range: number) {
+  return `${(range / (MAX_MICRONS - MIN_MICRONS)) * 100}%`;
+}
+
 // Comparison table rows (µm → settings per grinder)
 // Wilfa Uniform: ~25.5 µm/step, scale 1–41 (max ~1020 µm)
 // Comandante C40: 30 µm/click
 // ZP6: 22 µm/click
+// X-Pro S / JX-Pro S: 12.5 µm/click
+// K-Ultra: 20 µm/click
 const tableRows = [
   { microns: 200  },
   { microns: 400  },
@@ -40,6 +46,9 @@ const tableRows = [
   wilfa: Math.min(41, Math.round(r.microns / WILFA_STEP_MICRONS) + 1),
   comandante: Math.round(r.microns / 30),
   zp6: Math.round(r.microns / 22),
+  xpros: Math.round(r.microns / 12.5),
+  jxpros: Math.round(r.microns / 12.5),
+  kultra: Math.round(r.microns / 20),
 }));
 
 export default function GrindPage() {
@@ -72,7 +81,7 @@ export default function GrindPage() {
             <div key={method.name} className="relative h-9 bg-warm-white rounded-lg">
               <div
                 className="absolute top-0 h-full bg-accent/80 rounded-lg flex items-center px-2"
-                style={{ left: pct(method.min), width: pct(method.max - method.min) }}
+                style={{ left: pct(method.min), width: widthPct(method.max - method.min) }}
               >
                 <span className="text-xs font-label font-medium text-white truncate">
                   {method.name}
@@ -114,12 +123,18 @@ export default function GrindPage() {
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Wilfa Uniform</th>
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">Comandante C40</th>
                 <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso ZP6</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso X-Pro S</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso JX-Pro S</th>
+                <th className="text-left px-4 py-3 font-label font-medium text-text-secondary text-xs">1Zpresso K-Ultra</th>
               </tr>
               <tr className="border-b border-border bg-warm-white">
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">step size</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">~25.5 µm/step</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">30 µm/click</th>
                 <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">22 µm/click</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">12.5 µm/click</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">12.5 µm/click</th>
+                <th className="px-4 pb-2 font-label text-[10px] text-text-secondary/60 text-left">20 µm/click</th>
               </tr>
             </thead>
             <tbody>
@@ -129,6 +144,9 @@ export default function GrindPage() {
                   <td className="px-4 py-3 text-text-secondary">{row.wilfa}</td>
                   <td className="px-4 py-3 text-text-secondary">{row.comandante}</td>
                   <td className="px-4 py-3 text-text-secondary">{row.zp6}</td>
+                  <td className="px-4 py-3 text-text-secondary">{row.xpros}</td>
+                  <td className="px-4 py-3 text-text-secondary">{row.jxpros}</td>
+                  <td className="px-4 py-3 text-text-secondary">{row.kultra}</td>
                 </tr>
               ))}
             </tbody>
