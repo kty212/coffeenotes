@@ -327,6 +327,23 @@ export const recipes: Recipe[] = [
     sourceUrl: "https://www.youtube.com/watch?v=3euEkTBxtEk",
   },
   {
+    id: "hario-neo-chien-wei-liao",
+    name: "Chien-Wei Liao's Recipe",
+    description: "V60 Brewers Cup 2025 World 2nd Place and Taiwan Champion from Tri-Up Coffee. Pour from the outer edge then switch to the centre to bring out sweetness and a lingering aftertaste.",
+    brewerId: "hario-neo-switch",
+    defaultDose: 16,
+    ratio: 15,
+    waterTempC: 92,
+    grindSize: "Medium",
+    totalBrewTimeSec: 180,
+    pouringSchedule: [
+      { timeSeconds: 0,  pourGrams: 40,  note: "1st pour" },
+      { timeSeconds: 30, pourGrams: 90,  note: "2nd pour — circular from outer edge" },
+      { timeSeconds: 60, pourGrams: 110, note: "3rd pour — outer edge to 160mL, then centre pour to 240mL" },
+    ],
+    notes: "Pour evenly over the entire bed. During the 3rd pour, switch from outer circular to a centre pour when the water level reaches 160mL.",
+  },
+  {
     id: "hario-neo-switch-daiki",
     name: "Daiki's Immersion",
     description: "A clean full-immersion recipe by @daiki_hatakeyama_coffee. Close the switch before pouring, stir twice during the steep, then open at 1:00 to drain.",
