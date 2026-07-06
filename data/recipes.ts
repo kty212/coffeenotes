@@ -97,7 +97,7 @@ export const recipes: Recipe[] = [
   },
   {
     id: "v60-helm-coffee",
-    name: "Helm Coffee Pour Over",
+    name: "Helm Coffee V60 Switch",
     description: "Helm Coffee Roasters' signature pour over. A 40/60 percolation-to-immersion hybrid — requires a Hario Switch or April Hybrid brewer.",
     brewerId: "v60",
     defaultDose: 15,
