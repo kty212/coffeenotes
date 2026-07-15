@@ -353,7 +353,7 @@ export const recipes: Recipe[] = [
     ratio: 15,
     waterTempC: 92,
     grindSize: "Medium",
-    totalBrewTimeSec: 180,
+    totalBrewTimeSec: 120,
     pouringSchedule: [
       { timeSeconds: 0,  pourGrams: 40,  note: "1st pour" },
       { timeSeconds: 30, pourGrams: 90,  note: "2nd pour — circular from outer edge" },
