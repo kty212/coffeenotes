@@ -7,6 +7,7 @@ export const brewers: Brewer[] = [
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
   { id: "hario-neo-switch", name: "Hario Neo" },
+  { id: "hario-switch", name: "Hario Switch" },
   { id: "origami", name: "Origami Dripper" },
 ];
 
@@ -379,6 +380,26 @@ export const recipes: Recipe[] = [
     ],
     notes: "Rinse the filter before brewing. Stir gently at 0:00, more vigorously at 0:30. Open the switch at 1:00 and let it drain completely.",
     sourceUrl: "https://www.instagram.com/daiki_hatakeyama_coffee/",
+  },
+  {
+    id: "hario-switch-ole-kristian-boen",
+    name: "Ole Kristian Bøen's Switch Recipe",
+    description: "2020 Norwegian Brewers Cup champion Ole Kristian Bøen's hybrid immersion/percolation method. Alternates between closed and open valve to build body and sweetness — especially effective for complex or fermented coffees.",
+    brewerId: "hario-switch",
+    defaultDose: 16.5,
+    ratio: 14.55,
+    waterTempC: 96,
+    grindSize: "Medium-Fine",
+    filter: "Hario V60 Paper (02)",
+    totalBrewTimeSec: 195,
+    pouringSchedule: [
+      { timeSeconds: 0,   pourGrams: 50,  note: "Valve closed — bloom" },
+      { timeSeconds: 40,  pourGrams: 100, note: "Open valve — centre pour" },
+      { timeSeconds: 90,  pourGrams: 90,  note: "Close valve — circular pour" },
+      { timeSeconds: 130, pourGrams: 0,   note: "Open valve — allow full draw-down" },
+    ],
+    notes: "Target total brew time 3:00–3:15. Closing the valve for the second immersion phase builds sweetness and body. Well suited to natural or fermented coffees.",
+    sourceUrl: "https://www.hario-europe.com/blogs/hario-community/ole-kristian-boens-switch-recipe",
   },
   {
     id: "origami-kurasu",
