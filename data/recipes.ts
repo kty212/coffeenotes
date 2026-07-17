@@ -7,7 +7,6 @@ export const brewers: Brewer[] = [
   { id: "april", name: "April Brewer" },
   { id: "ufo-v3", name: "UFO V3" },
   { id: "hario-neo-switch", name: "Hario Neo" },
-  { id: "hario-switch", name: "Hario Switch" },
   { id: "origami", name: "Origami Dripper" },
 ];
 
@@ -385,7 +384,7 @@ export const recipes: Recipe[] = [
     id: "hario-switch-ole-kristian-boen",
     name: "Ole Kristian Bøen's Switch Recipe",
     description: "2020 Norwegian Brewers Cup champion Ole Kristian Bøen's hybrid immersion/percolation method. Alternates between closed and open valve to build body and sweetness — especially effective for complex or fermented coffees.",
-    brewerId: "hario-switch",
+    brewerId: "v60",
     defaultDose: 16.5,
     ratio: 14.55,
     waterTempC: 96,
