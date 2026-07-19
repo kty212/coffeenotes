@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { getRecipeById, getBrewerById, recipes } from "@/data/recipes";
 import { formatTime } from "@/lib/recipeUtils";
 import PouringSchedule from "@/components/PouringSchedule";
+import RatingStars from "@/components/RatingStars";
 
 export function generateStaticParams() {
   return recipes.map((r) => ({ id: r.id }));
@@ -82,6 +83,9 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
           <p className="text-text-secondary mt-2 text-sm leading-relaxed">{recipe.description}</p>
         )}
       </div>
+
+      {/* Rating */}
+      <RatingStars recipeId={recipe.id} />
 
       {/* Key stats */}
       <div className="grid grid-cols-2 sm:grid-cols-4 gap-2">

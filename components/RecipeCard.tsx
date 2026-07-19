@@ -1,22 +1,32 @@
 import Link from "next/link";
-import type { Recipe } from "@/types/recipe";
+import type { Recipe, RecipeRating } from "@/types/recipe";
 import { getBrewerById } from "@/data/recipes";
 import { formatTime } from "@/lib/recipeUtils";
+import StarRow from "@/components/StarRow";
 
 interface Props {
   recipe: Recipe;
+  rating?: RecipeRating;
 }
 
-export default function RecipeCard({ recipe }: Props) {
+export default function RecipeCard({ recipe, rating }: Props) {
   const brewer = getBrewerById(recipe.brewerId);
 
   return (
     <Link href={`/recipe/${recipe.id}`} className="flex flex-col">
       <div className="bg-surface border border-border rounded-2xl p-5 hover:border-accent transition-colors flex flex-col flex-1">
         <div className="mb-3 flex-1">
-          <span className="text-xs font-label font-medium text-accent uppercase tracking-wide">
-            {brewer?.name}
-          </span>
+          <div className="flex items-start justify-between gap-2">
+            <span className="text-xs font-label font-medium text-accent uppercase tracking-wide">
+              {brewer?.name}
+            </span>
+            {rating && rating.count > 0 && (
+              <span className="flex items-center gap-1 shrink-0 text-xs text-text-secondary">
+                <StarRow value={rating.avg} size="text-xs" />
+                <span>({rating.count})</span>
+              </span>
+            )}
+          </div>
           <h2 className="font-display text-xl text-text-primary mt-1">{recipe.name}</h2>
           {recipe.description && (
             <p className="text-sm text-text-secondary mt-1 line-clamp-2">{recipe.description}</p>
