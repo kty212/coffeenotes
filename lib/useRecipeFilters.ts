@@ -1,9 +1,9 @@
 "use client";
 
-import { useState, useMemo } from "react";
+import { useCallback, useMemo } from "react";
+import { useRouter, usePathname, useSearchParams } from "next/navigation";
 import Fuse from "fuse.js";
 import { recipes } from "@/data/recipes";
-import { useSearch } from "@/lib/SearchContext";
 import type { Recipe } from "@/types/recipe";
 
 export type SortOption = "default" | "name" | "brewTime" | "ratio" | "temp";
@@ -21,9 +21,38 @@ const fuseOptions = {
 };
 
 export function useRecipeFilters() {
-  const { searchQuery } = useSearch();
-  const [selectedBrewer, setSelectedBrewer] = useState("all");
-  const [sortBy, setSortBy] = useState<SortOption>("default");
+  const router = useRouter();
+  const pathname = usePathname();
+  const searchParams = useSearchParams();
+
+  // The URL is the single source of truth for filters.
+  const searchQuery = searchParams.get("q") ?? "";
+  const selectedBrewer = searchParams.get("brewer") ?? "all";
+  const sortBy = (searchParams.get("sort") as SortOption) ?? "default";
+
+  // Merge a param into the URL, dropping it when it's the default value so the
+  // URL stays clean. `replace` (not `push`) keeps a single home history entry.
+  const setParam = useCallback(
+    (name: string, value: string, defaultValue: string) => {
+      const params = new URLSearchParams(searchParams.toString());
+      if (value === defaultValue) params.delete(name);
+      else params.set(name, value);
+      const query = params.toString();
+      router.replace(query ? `${pathname}?${query}` : pathname, {
+        scroll: false,
+      });
+    },
+    [router, pathname, searchParams]
+  );
+
+  const setSelectedBrewer = useCallback(
+    (id: string) => setParam("brewer", id, "all"),
+    [setParam]
+  );
+  const setSortBy = useCallback(
+    (sort: SortOption) => setParam("sort", sort, "default"),
+    [setParam]
+  );
 
   const fuse = useMemo(() => new Fuse(recipes, fuseOptions), []);
 

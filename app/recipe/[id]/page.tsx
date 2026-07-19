@@ -1,10 +1,10 @@
 import { notFound } from "next/navigation";
-import Link from "next/link";
 import type { Metadata } from "next";
 import { getRecipeById, getBrewerById, recipes } from "@/data/recipes";
 import { formatTime } from "@/lib/recipeUtils";
 import PouringSchedule from "@/components/PouringSchedule";
 import RatingStars from "@/components/RatingStars";
+import BackLink from "@/components/BackLink";
 
 export function generateStaticParams() {
   return recipes.map((r) => ({ id: r.id }));
@@ -69,9 +69,9 @@ export default async function RecipePage({ params }: { params: Promise<{ id: str
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
       {/* Back */}
-      <Link href="/" className="inline-flex items-center text-sm text-text-secondary hover:text-accent transition-colors gap-1">
+      <BackLink className="inline-flex items-center text-sm text-text-secondary hover:text-accent transition-colors gap-1">
         ← All recipes
-      </Link>
+      </BackLink>
 
       {/* Header */}
       <div>
