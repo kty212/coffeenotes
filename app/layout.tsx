@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import { EB_Garamond, DM_Sans, Space_Grotesk } from "next/font/google";
 import Script from "next/script";
-import { SearchProvider } from "@/lib/SearchContext";
 import Header from "@/components/Header";
 import "./globals.css";
 
@@ -90,10 +89,8 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: "none", visibility: "hidden" }}
           />
         </noscript>
-        <SearchProvider>
-          <Header />
-          <main className="max-w-2xl mx-auto px-4 py-6">{children}</main>
-        </SearchProvider>
+        <Header />
+        <main className="max-w-2xl mx-auto px-4 py-6">{children}</main>
       </body>
     </html>
   );
