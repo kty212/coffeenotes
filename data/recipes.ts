@@ -138,7 +138,7 @@ export const recipes: Recipe[] = [
     description: "Kurasu's Japanese-style iced pour-over. Brew 150g of hot water directly over 70g of ice in the server for an instantly chilled, clean and bright cup.",
     brewerId: "v60",
     defaultDose: 16,
-    ratio: 13.75,
+    ratio: 9.38,
     waterTempC: 91,
     grindSize: "Medium-Fine",
     totalBrewTimeSec: 130,
