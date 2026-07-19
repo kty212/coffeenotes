@@ -26,3 +26,8 @@ export interface Brewer {
   id: string;
   name: string;
 }
+
+export interface RecipeRating {
+  count: number;
+  avg: number;
+}

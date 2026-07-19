@@ -1,12 +1,23 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { recipes } from "@/data/recipes";
 import { useRecipeFilters } from "@/lib/useRecipeFilters";
 import type { SortOption } from "@/lib/useRecipeFilters";
+import type { RecipeRating } from "@/types/recipe";
 import BrewerFilter from "@/components/BrewerFilter";
 import RecipeCard from "@/components/RecipeCard";
 
 export default function HomeContent() {
+  const [ratings, setRatings] = useState<Record<string, RecipeRating>>({});
+
+  useEffect(() => {
+    fetch("/api/ratings")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((data) => data && setRatings(data))
+      .catch(() => {});
+  }, []);
+
   const {
     filteredRecipes,
     searchQuery,
@@ -52,7 +63,7 @@ export default function HomeContent() {
       ) : (
         <div className="grid gap-3 sm:grid-cols-2 items-stretch">
           {filteredRecipes.map((recipe) => (
-            <RecipeCard key={recipe.id} recipe={recipe} />
+            <RecipeCard key={recipe.id} recipe={recipe} rating={ratings[recipe.id]} />
           ))}
         </div>
       )}
