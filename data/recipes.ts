@@ -491,7 +491,7 @@ export const recipes: Recipe[] = [
       { timeSeconds: 30, pourGrams: 45,  note: "Second bloom" },
       { timeSeconds: 60, pourGrams: 135, note: "Final pour" },
     ],
-    notes: "Target finish by 2:30.",
+    notes: "Target finish by 2:00–2:30.",
     sourceUrl: "https://youtu.be/PNFVCmxBjQQ?si=1D-Z5l6ooZWZ_Xhc",
   },
   {
