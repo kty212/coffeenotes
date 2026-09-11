@@ -62,7 +62,7 @@ export function useRecipeFilters() {
     if (searchQuery.trim()) {
       result = fuse.search(searchQuery).map((r) => r.item);
     } else {
-      result = [...recipes];
+      result = [...recipes].reverse();
     }
 
     if (selectedBrewer !== "all") {
