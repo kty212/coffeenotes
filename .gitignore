@@ -39,3 +39,14 @@ yarn-error.log*
 # typescript
 *.tsbuildinfo
 next-env.d.ts
+
+# coffee log: original bag photos staged for processing (large; not needed in repo)
+/inbox/*
+!/inbox/README.md
+
+# coffee log: QR codes are regenerated at build time (prebuild -> generate:qr)
+/public/bags/**/*.svg
+/public/bags/**/*.png
+
+# project planning doc (local only)
+/Coffee Log — Project Brief.md
