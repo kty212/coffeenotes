@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import { getYears } from "@/lib/bags";
+import LogLinkFixer from "@/components/LogLinkFixer";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://log.coffeenotes.fyi"),
@@ -20,6 +21,7 @@ export default function LogLayout({
 
   return (
     <>
+      <LogLinkFixer />
       <header className="sticky top-0 z-10 bg-bg/90 backdrop-blur border-b border-border">
         <div className="max-w-3xl mx-auto px-4 h-14 flex items-center justify-between">
           {/* On the log subdomain this resolves to the log home via the proxy. */}
