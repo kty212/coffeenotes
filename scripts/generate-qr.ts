@@ -88,50 +88,65 @@ function qrMarkup(url: string, x: number, y: number, size: number): string {
   );
 }
 
-function centeredText(
+function leftText(
   s: string,
-  cx: number,
+  x: number,
   y: number,
   size: number,
   weight: number,
   fill: string,
 ): string {
   return (
-    `<text x="${cx}" y="${y}" text-anchor="middle" font-family="DM Sans" ` +
+    `<text x="${x}" y="${y}" text-anchor="start" font-family="DM Sans" ` +
     `font-weight="${weight}" font-size="${size}" fill="${fill}">${escapeXml(s)}</text>`
   );
 }
 
-/** Compose the full label SVG for a bag. */
+// Physical label geometry (landscape, matches a 40mm × 14mm label).
+const LABEL_MM = { w: 40, h: 14 };
+const U = 10; // user units per mm
+
+/** Compose the landscape label SVG for a bag: QR on the left, text on the right. */
 function labelSvg(bag: Bag): string {
-  const W = 720;
-  const pad = 50;
-  const qrSize = 460;
-  const cx = W / 2;
+  const W = LABEL_MM.w * U; // 400
+  const H = LABEL_MM.h * U; // 140
+  const pad = 7;
 
-  const parts: string[] = [qrMarkup(bagUrl(bag), (W - qrSize) / 2, pad, qrSize)];
+  const qrSize = H - pad * 2;
+  const parts: string[] = [qrMarkup(bagUrl(bag), pad, pad, qrSize)];
 
-  let y = pad + qrSize + 56;
+  const tx = pad + qrSize + 10; // text column left edge
+  const tw = W - tx - pad; // text column width
+  const maxChars = Math.max(10, Math.floor(tw / 9.5)); // ~char width at 18u
 
-  parts.push(centeredText(bag.roaster, cx, y, 28, 700, COLOR.accent));
-  y += 48;
-
-  for (const line of wrap(bag.coffee, 24, 3)) {
-    parts.push(centeredText(line, cx, y, 36, 700, COLOR.text));
-    y += 46;
+  // Build the stacked text lines, then vertically center the block.
+  type Line = { s: string; size: number; weight: number; fill: string; lh: number };
+  const lines: Line[] = [
+    { s: bag.roaster, size: 15, weight: 700, fill: COLOR.accent, lh: 18 },
+  ];
+  for (const l of wrap(bag.coffee, maxChars, 2)) {
+    lines.push({ s: l, size: 18, weight: 700, fill: COLOR.text, lh: 21 });
   }
-
   if (bag.roastDate) {
-    y += 6;
-    parts.push(
-      centeredText(`Roasted ${formatDate(bag.roastDate)}`, cx, y, 24, 400, COLOR.muted),
-    );
-    y += 30;
+    lines.push({
+      s: `Roasted ${formatDate(bag.roastDate)}`,
+      size: 13,
+      weight: 400,
+      fill: COLOR.muted,
+      lh: 17,
+    });
   }
 
-  const H = Math.round(y - 20 + pad);
+  const blockH = lines.reduce((sum, l) => sum + l.lh, 0);
+  let y = (H - blockH) / 2;
+  for (const l of lines) {
+    y += l.lh;
+    parts.push(leftText(l.s, tx, y - 4, l.size, l.weight, l.fill));
+  }
+
   return (
-    `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}">` +
+    `<svg xmlns="http://www.w3.org/2000/svg" width="${LABEL_MM.w}mm" height="${LABEL_MM.h}mm" ` +
+    `viewBox="0 0 ${W} ${H}">` +
     `<rect width="${W}" height="${H}" fill="#ffffff"/>${parts.join("")}</svg>`
   );
 }
@@ -153,7 +168,7 @@ async function main() {
     fs.writeFileSync(path.join(outDir, `${bag.id}-label.svg`), svg);
     const png = new Resvg(svg, {
       font: { fontFiles: [FONT_FILE], defaultFontFamily: "DM Sans", loadSystemFonts: false },
-      fitTo: { mode: "width", value: 1440 },
+      fitTo: { mode: "width", value: 1200 },
     })
       .render()
       .asPng();
