@@ -247,21 +247,34 @@ function BagPage({ bag }: { bag: Bag }) {
         <p className="mt-3 text-xs font-label text-text-secondary text-center">
           {bag.id} · log.coffeenotes.fyi
         </p>
-        <div className="mt-2 flex items-center gap-3">
-          <a
-            href={`/bags/${year}/${bag.id}.svg`}
-            download
-            className="text-xs text-text-secondary hover:text-accent transition-colors"
-          >
-            Download SVG
-          </a>
-          <a
-            href={`/bags/${year}/${bag.id}.png`}
-            download
-            className="text-xs text-text-secondary hover:text-accent transition-colors"
-          >
-            Download PNG
-          </a>
+        <div className="mt-3 flex flex-col items-center gap-1">
+          <span className="text-xs font-label text-text-secondary uppercase tracking-wide">
+            Print label
+          </span>
+          <div className="flex items-center gap-3">
+            <a
+              href={`/bags/${year}/${bag.id}-label.png`}
+              download
+              className="text-xs text-text-secondary hover:text-accent transition-colors"
+            >
+              PNG
+            </a>
+            <a
+              href={`/bags/${year}/${bag.id}-label.svg`}
+              download
+              className="text-xs text-text-secondary hover:text-accent transition-colors"
+            >
+              SVG
+            </a>
+            <span className="text-border">·</span>
+            <a
+              href={`/bags/${year}/${bag.id}.svg`}
+              download
+              className="text-xs text-text-secondary hover:text-accent transition-colors"
+            >
+              QR only
+            </a>
+          </div>
         </div>
       </div>
     </div>
