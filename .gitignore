@@ -44,6 +44,9 @@ next-env.d.ts
 /inbox/*
 !/inbox/README.md
 
+# coffee log: archived full-res originals (kept locally, not in repo)
+/archive/
+
 # coffee log: QR codes are regenerated at build time (prebuild -> generate:qr)
 /public/bags/**/*.svg
 /public/bags/**/*.png
