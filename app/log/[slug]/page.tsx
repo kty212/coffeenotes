@@ -16,6 +16,7 @@ import {
 import type { Bag } from "@/types/bag";
 import BagCard from "@/components/BagCard";
 import StarRow from "@/components/StarRow";
+import PhotoGallery from "@/components/PhotoGallery";
 
 const YEAR_PATTERN = /^\d{4}$/;
 const BAG_PATTERN = /^\d{4}-\d{3}$/;
@@ -133,44 +134,13 @@ function BagPage({ bag }: { bag: Bag }) {
       </a>
 
       {/* Photos (cover first, then any extras e.g. the back of the bag).
-          Single photo spans full width; multiples sit side by side. */}
-      {(() => {
-        const urls = photoUrls(bag);
-        return (
-          <div
-            className={
-              urls.length > 1
-                ? "grid grid-cols-2 gap-3"
-                : "overflow-hidden rounded-2xl bg-surface border border-border"
-            }
-          >
-            {urls.map((src, i) =>
-              urls.length > 1 ? (
-                <div
-                  key={src}
-                  className="overflow-hidden rounded-2xl bg-surface border border-border aspect-[4/5]"
-                >
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img
-                    src={src}
-                    alt={`${bag.roaster} — ${bag.coffee}${i > 0 ? ` (${i + 1})` : ""}`}
-                    loading={i > 0 ? "lazy" : undefined}
-                    className="h-full w-full object-cover"
-                  />
-                </div>
-              ) : (
-                // eslint-disable-next-line @next/next/no-img-element
-                <img
-                  key={src}
-                  src={src}
-                  alt={`${bag.roaster} — ${bag.coffee}`}
-                  className="w-full"
-                />
-              ),
-            )}
-          </div>
-        );
-      })()}
+          Click a photo to open a full-screen lightbox. */}
+      <PhotoGallery
+        photos={photoUrls(bag).map((src, i) => ({
+          src,
+          alt: `${bag.roaster} — ${bag.coffee}${i > 0 ? ` (${i + 1})` : ""}`,
+        }))}
+      />
 
       {/* Header */}
       <div>
