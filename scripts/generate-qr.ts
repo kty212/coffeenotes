@@ -24,13 +24,6 @@ const BASE_URL = "https://log.coffeenotes.fyi";
 // Print/sticker friendly: chunky modules, generous quiet zone.
 const SVG_OPTS = { margin: 2, width: 512, errorCorrectionLevel: "M" as const };
 
-// Theme colors (match the site).
-const COLOR = {
-  text: "#1a1208",
-  muted: "#7a6e65",
-  accent: "#8b5e3c",
-};
-
 function bagUrl(bag: Bag): string {
   return `${BASE_URL}/${bag.id}`;
 }
@@ -120,19 +113,22 @@ function labelSvg(bag: Bag): string {
   const maxChars = Math.max(10, Math.floor(tw / 9.5)); // ~char width at 18u
 
   // Build the stacked text lines, then vertically center the block.
+  // All black for a clean mono thermal print (Niimbot D11); hierarchy comes
+  // from size/weight, not color.
+  const INK = "#000000";
   type Line = { s: string; size: number; weight: number; fill: string; lh: number };
   const lines: Line[] = [
-    { s: bag.roaster, size: 15, weight: 700, fill: COLOR.accent, lh: 18 },
+    { s: bag.roaster, size: 15, weight: 500, fill: INK, lh: 18 },
   ];
   for (const l of wrap(bag.coffee, maxChars, 2)) {
-    lines.push({ s: l, size: 18, weight: 700, fill: COLOR.text, lh: 21 });
+    lines.push({ s: l, size: 18, weight: 700, fill: INK, lh: 21 });
   }
   if (bag.roastDate) {
     lines.push({
       s: `Roasted ${formatDate(bag.roastDate)}`,
       size: 13,
       weight: 400,
-      fill: COLOR.muted,
+      fill: INK,
       lh: 17,
     });
   }
