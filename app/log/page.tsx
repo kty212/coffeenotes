@@ -9,7 +9,7 @@ export default function LogHome() {
       <div>
         <h1 className="font-display text-3xl text-text-primary">Coffee Log</h1>
         <p className="text-text-secondary mt-2 text-sm leading-relaxed">
-          Every bag I drink, one permanent page at a time. Newest first.
+          Every bag I drink.
         </p>
       </div>
 
